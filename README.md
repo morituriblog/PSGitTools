@@ -27,3 +27,15 @@ Save the files of the specified commit
   sample\out-gitfiles-sample.bat
 
   sample\out-gitfiles-sample-by-files.bat
+
+## Get-GitDiffNameStatusList
+
+Get 'git diff --name-status' output in object list
+
+* Source file : 
+  
+  diff.ps1
+
+* Sample batch file :
+  
+  sample\out-gitdiffnamestatuslist-sample.bat
