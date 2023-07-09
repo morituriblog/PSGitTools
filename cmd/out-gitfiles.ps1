@@ -1,7 +1,8 @@
 ﻿param(
     [string]$WorkDir,
     [string]$Commit,
-    [string]$OutDir
+    [string]$OutDir,
+    [string]$Files
 )
 
 $rootDir = [System.IO.Path]::GetDirectoryName($MyInvocation.InvocationName)
@@ -15,4 +16,6 @@ if (![System.IO.Directory]::Exists($OutDir)) {
 }
 $OutDir = [System.IO.Path]::GetFullPath($OutDir)
 
-Out-GitFiles -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -DeleteArchive
+$filesArg = $Files.Split(";")
+
+Out-GitFiles -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -Files $filesArg -DeleteArchive

@@ -25,3 +25,5 @@ Save the files of the specified commit
 * Sample batch file :
   
   sample\out-gitfiles-sample.bat
+
+  sample\out-gitfiles-sample-by-files.bat
