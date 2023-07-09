@@ -21,15 +21,16 @@ function Out-GitArchive {
         [string]$WorkDir,
         [string]$Commit,
         [string]$OutDir,
-        [string]$FileName
+        [string]$ArchiveName,
+        [string[]]$Files
     )
 
     $gitDir = Get-GitDir -Path $WorkDir
-    $archivePath = [System.IO.Path]::Combine($OutDir, $FileName)
+    $archivePath = [System.IO.Path]::Combine($OutDir, $ArchiveName)
     $format = "zip"
 
     Set-Location $gitDir
-    git archive $Commit -o $archivePath --format=$format
+    git archive $Commit -o $archivePath --format=$format $Files
 }
 
 function Start-ExtractZip {
@@ -52,7 +53,7 @@ function Out-GitFiles {
     )
 
     $zipName = "temp.zip"
-    Out-GitArchive -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -FileName $zipName
+    Out-GitArchive -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -ArchiveName $zipName
 
     $archivePath = [System.IO.Path]::Combine($OutDir, $zipName)
     Start-ExtractZip -ZipFile $archivePath -ExtractDir $OutDir

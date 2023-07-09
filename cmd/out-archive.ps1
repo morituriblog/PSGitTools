@@ -2,7 +2,8 @@
     [string]$WorkDir,
     [string]$Commit,
     [string]$OutDir,
-    [string]$FileName
+    [string]$ArchiveName,
+    [string]$Files
 )
 
 $rootDir = [System.IO.Path]::GetDirectoryName($MyInvocation.InvocationName)
@@ -16,4 +17,6 @@ if (![System.IO.Directory]::Exists($OutDir)) {
 }
 $OutDir = [System.IO.Path]::GetFullPath($OutDir)
 
-Out-GitArchive -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -FileName $FileName
+$filesArg = $Files.Split(";")
+
+Out-GitArchive -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -ArchiveName $ArchiveName -Files $filesArg

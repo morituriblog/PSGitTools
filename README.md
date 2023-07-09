@@ -11,6 +11,8 @@ Save the files of the specified commit to a zip file
 * Sample batch file :
   
   sample\out-archive-sample.bat
+  
+  sample\out-archive-sample-by-files.bat
 
 ## Out-GitFiles
 
