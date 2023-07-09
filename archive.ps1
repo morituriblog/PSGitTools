@@ -31,3 +31,31 @@ function Out-GitArchive {
     Set-Location $gitDir
     git archive $Commit -o $archivePath --format=$format
 }
+
+function Start-ExtractZip {
+    param(
+        [string]$ZipFile,
+        [string]$ExtractDir
+    )
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($ZipFile, $ExtractDir)
+}
+
+function Out-GitFiles {
+    param(
+        [string]$WorkDir,
+        [string]$Commit,
+        [string]$OutDir,
+        [switch]$DeleteArchive
+    )
+
+    $zipName = "temp.zip"
+    Out-GitArchive -WorkDir $WorkDir -Commit $Commit -OutDir $OutDir -FileName $zipName
+
+    $archivePath = [System.IO.Path]::Combine($OutDir, $zipName)
+    Start-ExtractZip -ZipFile $archivePath -ExtractDir $OutDir
+
+    if ($DeleteArchive) { Remove-Item -Path $archivePath }
+}
